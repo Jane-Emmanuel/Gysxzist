@@ -1,0 +1,292 @@
+‎<style>
+‎:root{
+‎--pink:#ff2d75;
+‎--gold:#ffd700;
+‎--bg:#0f0f0f;
+‎--green:#3cff7a;
+‎--red:#ff4d4d;
+‎}
+‎
+‎body{
+‎margin:0;
+‎background:var(--bg);
+‎color:white;
+‎font-family:system-ui,sans-serif;
+‎text-align:center;
+‎}
+‎
+‎h1{margin:10px 0}
+‎
+‎#hud{
+‎display:flex;
+‎justify-content:space-around;
+‎font-size:16px;
+‎}
+‎
+‎#coins{color:var(--gold)}
+‎
+‎#questionBox{
+‎margin:10px auto;
+‎max-width:500px;
+‎background:#1b1b1b;
+‎padding:12px;
+‎border-radius:10px;
+‎font-size:18px;
+‎display:none;
+‎}
+‎
+‎#clueBox{
+‎margin:5px auto;
+‎max-width:400px;
+‎background:#111;
+‎padding:8px;
+‎border-radius:8px;
+‎font-size:15px;
+‎color:#ffd700;
+‎display:none;
+‎}
+‎
+‎#emojiBox{
+‎font-size:40px;
+‎margin-top:10px;
+‎display:none;
+‎}
+‎
+‎#slots{
+‎display:flex;
+‎justify-content:center;
+‎flex-wrap:wrap;
+‎gap:10px;
+‎margin:20px;
+‎}
+‎
+‎#tiles{
+‎display:flex;
+‎flex-wrap:wrap;
+‎gap:10px;
+‎justify-content:center;
+‎max-height:200px;
+‎overflow-y:auto;
+‎margin:20px;
+‎padding-bottom:20px;
+‎}
+‎
+‎#giftRow{
+‎margin-top:15px;
+‎font-size:24px;
+‎pointer-events:auto;
+‎position:relative;
+‎z-index:1;
+‎}
+‎
+‎#chatBox{
+‎position:fixed;
+‎right:10px;
+‎bottom:10px;
+‎width:200px;
+‎height:180px;
+‎overflow:hidden;
+‎font-size:13px;
+‎text-align:left;
+‎background:rgba(0,0,0,0.6);
+‎padding:8px;
+‎border-radius:8px;
+‎}
+‎
+‎.chatMsg{
+‎opacity:0;
+‎animation:chatFade 6s forwards;
+‎}
+‎
+‎@keyframes chatFade{
+‎0%{opacity:0; transform:translateY(10px)}
+‎10%{opacity:1}
+‎90%{opacity:1}
+‎100%{opacity:0}
+‎}
+‎
+‎.slot{
+‎width:45px;
+‎height:55px;
+‎border:2px solid #444;
+‎font-size:28px;
+‎display:flex;
+‎align-items:center;
+‎justify-content:center;
+‎}
+‎
+‎.slot.fixed{color:#aaa}
+‎.slot.correct{color:var(--green);border-color:var(--green)}
+‎.slot.wrong{color:var(--red);border-color:var(--red)}
+‎
+‎.tile{
+‎width:45px;
+‎height:45px;
+‎background:var(--pink);
+‎border-radius:8px;
+‎font-size:22px;
+‎display:flex;
+‎align-items:center;
+‎justify-content:center;
+‎cursor:pointer;
+‎transition:0.3s;
+‎}
+‎
+‎.tile:hover{
+‎box-shadow:0 0 10px #ff2d75;
+‎transform:scale(1.1);
+‎}
+‎
+‎.tile.used{
+‎opacity:.3;
+‎pointer-events:none;
+‎}
+‎
+‎.coinRain{
+‎position:fixed;
+‎top:-40px;
+‎font-size:24px;
+‎animation:coinFall linear forwards;
+‎z-index:999;
+‎}
+‎
+‎@keyframes coinFall{
+‎to{
+‎transform:translateY(110vh) rotate(360deg);
+‎opacity:0;
+‎}
+‎}
+‎
+‎button{
+‎padding:12px 22px;
+‎border:none;
+‎border-radius:8px;
+‎background:var(--pink);
+‎color:white;
+‎cursor:pointer;
+‎font-size:18px;
+‎box-shadow:0 0 12px #ff2d75;
+‎animation:glow 2s infinite;
+‎position:relative;
+‎z-index:5;
+‎}
+‎
+‎button:disabled{
+‎opacity:0.5;
+‎pointer-events:none;
+‎}
+‎
+‎@keyframes glow{
+‎0%{box-shadow:0 0 5px #ff2d75}
+‎50%{box-shadow:0 0 20px #ff2d75}
+‎100%{box-shadow:0 0 5px #ff2d75}
+‎}
+‎
+‎#timerWrap{
+‎width:80%;
+‎max-width:400px;
+‎height:10px;
+‎background:#333;
+‎margin:10px auto;
+‎border-radius:20px;
+‎}
+‎
+‎#timerBar{
+‎height:100%;
+‎width:100%;
+‎background:linear-gradient(90deg,var(--gold),var(--pink));
+‎}
+‎
+‎@keyframes shake{
+‎0%{transform:translate(0,0)}
+‎20%{transform:translate(-4px,2px)}
+‎40%{transform:translate(4px,-2px)}
+‎60%{transform:translate(-3px,1px)}
+‎80%{transform:translate(3px,-1px)}
+‎100%{transform:translate(0,0)}
+‎}
+‎
+‎.shake{
+‎animation:shake 0.25s infinite;
+‎}
+‎
+‎#leaderboard{
+‎position:fixed;
+‎left:10px;
+‎top:10px;
+‎width:180px;
+‎background:rgba(0,0,0,0.6);
+‎color:white;
+‎padding:10px;
+‎border-radius:10px;
+‎font-size:13px;
+‎}
+‎
+‎#hypeWrap{
+‎width:80%;
+‎max-width:400px;
+‎height:8px;
+‎background:#222;
+‎margin:8px auto;
+‎border-radius:10px;
+‎}
+‎
+‎#hypeBar{
+‎height:100%;
+‎width:0%;
+‎background:linear-gradient(90deg,#ff2d75,#ffd700);
+‎}
+‎
+‎#status{
+‎min-height:30px;
+‎font-size:18px;
+‎}
+‎
+‎#celebrate{
+‎position:fixed;
+‎top:40%;
+‎left:50%;
+‎transform:translate(-50%,-50%);
+‎font-size:42px;
+‎display:none;
+‎}
+‎
+‎#confetti span{
+‎position:fixed;
+‎top:-10px;
+‎font-size:22px;
+‎animation:fall 3s linear forwards;
+‎}
+‎
+‎@keyframes fall{
+‎0%{transform:translateY(-10px)}
+‎100%{transform:translateY(100vh)}
+‎}
+‎
+‎#aliens span{
+‎position:fixed;
+‎top:-10px;
+‎font-size:26px;
+‎animation:alienFall 3s linear forwards;
+‎}
+‎
+‎@keyframes alienFall{
+‎0%{transform:translateY(-20px) rotate(0)}
+‎100%{transform:translateY(100vh) rotate(360deg)}
+‎}
+‎
+‎#boss{
+‎position:fixed;
+‎top:20%;
+‎left:50%;
+‎transform:translateX(-50%);
+‎font-size:80px;
+‎animation:bossFloat 2s infinite alternate;
+‎}
+‎
+‎@keyframes bossFloat{
+‎from{transform:translateX(-50%) translateY(0)}
+‎to{transform:translateX(-50%) translateY(-20px)}
+‎}
+‎</style>
+‎
