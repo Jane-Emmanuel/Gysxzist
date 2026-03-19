@@ -257,8 +257,13 @@
 ‎  if(e.key === "n") Game.start();
 ‎});
 ‎
-‎if ("serviceWorker" in navigator) {
-‎  navigator.serviceWorker.register("service-worker.js");
-‎}
+‎// ✅ SERVICE WORKER REGISTRATION (PUT AT THE VERY BOTTOM)
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js")
+      .then(() => console.log("Service Worker Registered"))
+      .catch((err) => console.log("SW failed:", err));
+  });
+}
 ‎</script>
 ‎
