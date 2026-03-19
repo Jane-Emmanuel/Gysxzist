@@ -237,7 +237,14 @@
 ‎
 ‎};
 ‎
-‎UI.nextBtn.onclick=()=>{if(SFX.bg.paused){SFX.bg.volume=0.25; SFX.bg.loop=true; SFX.bg.play().catch(()=>{});} Game.start();};
+‎UI.nextBtn.onclick = () => {
+  if (SFX.bg.paused) {
+    SFX.bg.volume = 0.25;
+    SFX.bg.loop = true;
+    SFX.bg.play().catch(()=>{});
+  }
+  Game.start();
+};
 ‎
 ‎document.getElementById("hintBtn").onclick=()=>Game.hint();
 ‎
