@@ -39,4 +39,9 @@ self.addEventListener("fetch", (e) => {
       return res || fetch(e.request);
     })
   );
+});  e.respondWith(
+    caches.match(e.request).then((res) => {
+      return res || fetch(e.request);
+    })
+  );
 });
