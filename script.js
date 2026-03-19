@@ -1,4 +1,4 @@
-‎<script>
+
 ‎const UI={
 ‎slots:document.getElementById("slots"),
 ‎tiles:document.getElementById("tiles"),
@@ -265,5 +265,4 @@ if ("serviceWorker" in navigator) {
       .catch((err) => console.log("SW failed:", err));
   });
 }
-‎</script>
 ‎
