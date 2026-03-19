@@ -46,6 +46,7 @@
 ‎];
 ‎
 ‎let modeIndex = 0;
+let currentMode = "missing";
 ‎
 ‎function getNextMode(){
 ‎  modeIndex++;
@@ -98,11 +99,24 @@
 ‎"BRANDING","MARKETING","ONLINE","NETWORK","GROWTH"
 ‎],
 ‎
-‎start(){clearInterval(this.timer); this.resetBoxes(); 
-‎currentMode = getNextMode();
-‎UI.status.innerText="🧠 Solve the puzzle!"; currentMode = GameModes[Math.floor(Math.random() * GameModes.length)];
-‎this.word = this.words[Math.floor(Math.random()*this.words.length)];
-‎UI.status.innerText = "🎮 Mode: " + currentMode.toUpperCase(); UI.level.innerText="Level "+this.level; this.render(); document.getElementById("hintBtn").disabled=false; this.startTimer();},
+start(){
+  clearInterval(this.timer);
+  this.resetBoxes();
+
+  currentMode = getNextMode(); // ✅ keep ONLY this
+
+  UI.status.innerText = "🎮 Mode: " + currentMode.toUpperCase();
+  
+  this.word = this.words[Math.floor(Math.random()*this.words.length)];
+
+  UI.level.innerText = "Level " + this.level;
+
+  this.render();
+
+  document.getElementById("hintBtn").disabled = false;
+
+  this.startTimer();
+},
 ‎
 ‎render(){UI.slots.innerHTML=""; UI.tiles.innerHTML=""; this.slots=this.word.split(""); this.hidden=[]; if(currentMode === "missing"){
 ‎  // your existing logic
@@ -238,7 +252,7 @@
 ‎};
 ‎
 ‎UI.nextBtn.onclick = () => {
-  if (SFX.bg.paused) {
+  if (SFX.bg && SFX.bg.paused) {
     SFX.bg.volume = 0.25;
     SFX.bg.loop = true;
     SFX.bg.play().catch(()=>{});
